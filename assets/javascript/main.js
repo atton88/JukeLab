@@ -1,4 +1,4 @@
-// Initialize Firebase  TEST
+// Initialize Firebase 
 var config = {
   apiKey: "AIzaSyC1CNzGvk1-txN23py3SyoVRrLmWbpbdvY",
   authDomain: "jukelab-e2948.firebaseapp.com",
