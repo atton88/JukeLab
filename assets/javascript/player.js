@@ -108,6 +108,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
     $('#pauseSongBtn').on("click", function() {
         player.togglePlay();
+        console.log("pause button clicked")
         $(this).find('i').toggleClass('fa-pause');
     });
 
@@ -155,7 +156,6 @@ roomNameRef.on("value", function(snapshot) {
 
 
 
-    // console.log(songArray);
 
     $(".songAppend").empty();
 
