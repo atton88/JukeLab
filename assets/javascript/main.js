@@ -24,9 +24,9 @@ var arrayIcons = ["ipod.png",
 function authorizeSpotify() {
     const devDomain = "http://localhost:8888";
     const prodDomain = "https://atton88.github.io/JukeLab"
-
+    const prodDomainKyle = "https://krchapman.github.io/JukeLab"
     var clientID = "b93cd2a896b04db6968176145cd8537f";
-    var redirectURI = `${devDomain}/playlist_host.html`;
+    var redirectURI = `${prodDomainKyle}/playlist_host.html`;
     var scopeParameter = "&scope=playlist-read-collaborative playlist-modify-public playlist-read-private playlist-modify-private user-read-currently-playing user-modify-playback-state user-read-playback-state app-remote-control streaming user-read-recently-played user-read-birthdate user-read-email user-read-private";
     var queryURL = "https://accounts.spotify.com/authorize/?client_id=" + clientID + "&response_type=token&redirect_uri=" + redirectURI + scopeParameter;
     
