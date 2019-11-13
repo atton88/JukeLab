@@ -1,10 +1,10 @@
-$(document).ready(function() {
+// $(document).ready(function() {
 
-$("#pauseSongBtn").click(function() {
+// $("#pauseSongBtn").click(function() {
 
-  $(this).find('i').toggleClass('fa-pause');
-  console.log("pause pressed")
-});
+//   $(this).find('i').toggleClass('fa-pause');
+//   console.log("pause pressed")
+// });
 
 
-});
+// });
