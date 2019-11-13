@@ -109,7 +109,8 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     $('#pauseSongBtn').on("click", function() {
         player.togglePlay();
         console.log("pause button clicked");
-        $(this).find('i').toggleClass('fa-pause');
+
+        $(this).find('i').toggleClass('fa-play', 'fa-pause');
     });
 
     $('#skipSongBtn').on("click", function() {
