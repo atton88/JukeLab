@@ -1,0 +1,22 @@
+{
+  "name": "jukelab",
+  "version": "1.0.0",
+  "description": "https://atton88.github.io/JukeLab/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "~4.16.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atton88/JukeLab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atton88/JukeLab/issues"
+  },
+  "homepage": "https://github.com/atton88/JukeLab#readme"
+}
