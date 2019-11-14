@@ -35,6 +35,10 @@ body {
   #logo img {
     max-width: 160px;
   }
+  #logo{
+    display: flex;
+    justify-content: space-between;
+  }
 
   #playlistName {
     width: 100%;
@@ -188,4 +192,10 @@ body {
 
   #logoImg:hover {
     cursor: pointer;
+}
+
+.time{
+  font-size: 30px;
+  display: block;
+  color: white;
 }

@@ -23,12 +23,19 @@ var idCurrent;
 var songArray = [];
 var initialPlayback = false;
 
-console.log(roomName);
+const time = {
+  databaseTime: 0,
+  initialTime: 0,
+  countDownTime: 0
+}
 
+console.log(roomName);
+var r;
 // Change room name
 $("#playlistName").text(roomName);
 
 // if user is host, make new playlist and add key to database
+
 if (window.location.href.includes("access_token")) {
     var isHost = true;
     token = parseURL(window.location.href);
@@ -37,13 +44,24 @@ if (window.location.href.includes("access_token")) {
     userID = getUserID();
     console.log(userID);
     // makePlaylist();
+    let time = Date.now()
     var newPlaylist = {
         name: roomName,
-        token: token, 
+        token: token,
+        time,
         timeStamp: new Date(0),
     }
-    database.ref().child(roomName).set(newPlaylist);
-    // database.ref().push(newPlaylist);
+
+  if ( localStorage.name !== roomName){
+    localStorage.time = time;
+    localStorage.name = roomName;  
+    }
+    else if ( localStorage.name === roomName){
+      newPlaylist.time = localStorage.time;
+    }
+  
+     database.ref().child(roomName).set(newPlaylist)
+    
     console.log(newPlaylist);
 } else {
     // if guest, search firebase, get authentication token
@@ -61,6 +79,10 @@ console.log("get item: " + roomName);
 ///////////////////////////////////////////////////
 // Initialize Spotify SDK and parse token from url
 window.onSpotifyWebPlaybackSDKReady = () => {
+
+
+
+
     const player = new Spotify.Player({
     name: 'JukeLab',
     getOAuthToken: cb => { cb(token); }
@@ -116,6 +138,8 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     $('#skipSongBtn').on("click", function() {
         player.nextTrack();
     });
+
+  initiateTimer(countDown);
 
 };
 
@@ -410,3 +434,47 @@ roomNameRef.on("value", function(snapshot) {
 $("#logo").on("click", function(){
     window.location.href = 'index.html';
   })
+
+
+function initiateTimer(countDownCB){
+  
+ 
+    let times =  document.querySelector(".time");
+
+      database.ref().child(roomName).once('value').then(function (snapshot) {
+        console.log("snapshotsnapshotsnapshot", snapshot.val());
+        time.databaseTime = snapshot.val().time;
+        
+        time.initialTime = 3600000 - (Date.now() - time.databaseTime);
+        
+        
+        timeGreaterThanZero = time.initialTime >= 0 ? time.initialTime : 0;
+        times.childNodes[0].innerText = millisToMinutesAndSeconds(timeGreaterThanZero);
+        if (timeGreaterThanZero > 0){
+          countDownCB(timeGreaterThanZero, times);
+        }
+        
+      })
+     
+  }
+
+  function countDown(timeMilli,times){
+    time.countDownTime = timeMilli;
+    setInterval(() => {
+      time.countDownTime = time.countDownTime - 1000;
+   
+      if (time.countDownTime >= 0){
+        times.childNodes[0].innerText = millisToMinutesAndSeconds(time.countDownTime);
+      }
+    }, 1000 );
+
+  }
+
+
+function millisToMinutesAndSeconds(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
+
+
